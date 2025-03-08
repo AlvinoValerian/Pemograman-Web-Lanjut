@@ -20,3 +20,12 @@ Route::get('/hello', function () {
 Route::get('/world', function () {
     return 'World';
 });
+
+Route::get('/',function (){
+    return 'Selamat Datang';
+});
+
+Route::get('/about',function (){
+    return 'Nim: 2341720027  Nama: Alvino Valerian D.R';
+
+});
