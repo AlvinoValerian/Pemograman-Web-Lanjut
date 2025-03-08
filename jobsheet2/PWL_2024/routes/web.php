@@ -29,3 +29,18 @@ Route::get('/about',function (){
     return 'Nim: 2341720027  Nama: Alvino Valerian D.R';
 
 });
+
+Route::get('/user/{name}',function ($name){
+    return 'Nama Saya '.$name;
+
+});
+
+Route::get('/posts/{post}/comments/{comment}',function 
+($postId,$commentId){
+    return 'Post ke- '.$postId." Komentar ke-: ".$commentId;
+
+});
+
+Route::get('/articles/{id}', function ($id) {
+    return "Halaman Artikel dengan ID $id";
+});
