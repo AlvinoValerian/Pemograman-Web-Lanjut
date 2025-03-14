@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -33,4 +34,5 @@ Route::get('/user/{id}/name/{name}', [UserController::class, 'show']);
 Route::get('/sales', [SalesController::class, '__invoke']);
 
 Route::get('/level',[LevelController::class, 'index']);
+Route::get('/kategori',[KategoriController::class, 'index']);
 
