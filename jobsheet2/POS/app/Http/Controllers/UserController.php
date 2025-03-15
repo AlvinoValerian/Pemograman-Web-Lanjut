@@ -39,14 +39,19 @@ class UserController extends Controller
 
         $user = UserModel::firstOrNew(
             [
-                'username' => 'manager33',
-                'nama' => 'Manager Tiga Tiga',
+                'username' => 'manager11',
+                'nama' => 'Manager11',
                 'password' => Hash::make('12345'),
                 'level_id' => 2
             ],
         );
+        $user->username = 'manager12';
+
         $user->save();
-        
+        $user->isDirty();
+        $user->isClean();
+        dd($user->isDirty());
+
         return view('user', ['data' => $user]);
         // $user =UserModel::all();
         // return view('user',['data' => $user]);
