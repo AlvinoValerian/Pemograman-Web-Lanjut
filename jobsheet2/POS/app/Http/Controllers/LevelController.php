@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class LevelController extends Controller
 {
     public function index(){
-        // DB::insert('insert into m_level(level_kode, level_nama, created_at) values(?,?,?)', ['CUS', 'pelanggan', now()]);
+        // DB::insert('insert into m_level(level_id ,level_kode, level_nama, created_at) values(?,?,?,?)', [4,'PLG', 'Pelanggan', now()]);
 
         // return 'insert data baru berhasil';
 
