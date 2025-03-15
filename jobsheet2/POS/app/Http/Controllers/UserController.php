@@ -22,19 +22,20 @@ class UserController extends Controller
             // 'password' => Hash::make('12345'),
             // 'level_id' => 4
             // 'nama' => 'Pelanggan Pertama',
-            // 'level_id' =>5,
-            // 'username' => 'manager_tiga',
-            // 'nama' => 'Manager 3',
-            // 'password' => Hash::make('12345')
+        //     'level_id' =>5,
+        //     'username' => 'manager_tiga',
+        //     'nama' => 'Manager 3',
+        //     'password' => Hash::make('12345')
             
         // ];
-        // UserModel::create($data);
+        // UserModel::insert($data);
         // UserModel::where('username','customer-1')->update($data);
 
         // $user =UserModel::find(1);
         //     return view('user',['data' => $user]);
 
-        $user =UserModel::where('username','manager9')->firstOrFail();
+        $user =UserModel::where('level_id',5)->count();
+        // dd($user);
         return view('user', ['data' => $user]);
 
         // $user =UserModel::all();
