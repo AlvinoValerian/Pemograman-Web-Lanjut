@@ -52,10 +52,14 @@ class UserController extends Controller
         // $user->isClean();
         // dd($user->isDirty());
 
-        $user = UserModel::all();
-        return view('user', ['data' => $user]);
+        // $user = UserModel::all();
+        // return view('user', ['data' => $user]);
+
         // $user =UserModel::all();
         // return view('user',['data' => $user]);
+        $user =UserModel::with('level')->get();
+        // dd($user);
+        return view('user', ['data' => $user]);
     }
 
     public function tambah(){
