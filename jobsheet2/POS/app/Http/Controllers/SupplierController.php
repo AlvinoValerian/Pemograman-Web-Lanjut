@@ -105,6 +105,24 @@ class SupplierController extends Controller
 
         return view('supplier.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'supplier' => $supplier, 'activeMenu' => $activeMenu]);
     }
+    public function show_ajax(string $id)
+    {
+
+        $supplier = SupplierModel::find($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Supplier',
+            'list' => ['Home', 'Supplier', 'Detail']
+        ];
+
+        $page = (object) [
+            'title' => 'Detail Supplier'
+
+        ];
+
+        $activeMenu = 'supplier'; 
+
+        return view('supplier.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'supplier' => $supplier, 'activeMenu' => $activeMenu]);
+    }
 
     public function edit(string $id)
     {
