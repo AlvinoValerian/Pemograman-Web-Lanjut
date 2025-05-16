@@ -132,6 +132,11 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+      <a href="logout" class="nav-link text-danger">
+        <i class="fas fa-sign-out-alt"></i> Log out
+      </a>
+    </li>
     </ul>
   </nav>
   <!-- /.navbar -->
