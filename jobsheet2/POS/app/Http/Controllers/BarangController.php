@@ -119,21 +119,9 @@ class BarangController extends Controller
     }
     public function show_ajax(string $id)
     {
+        $barang = BarangModel::find($id);
 
-        $barang = BarangModel::with('kategori')->find($id);
-
-        $breadcrumb = (object) [
-            'title' => 'Detail Barang',
-            'list' => ['Home', 'Barang', 'Detail']
-        ];
-        $page = (object) [
-            'title' => 'Detail Barang'
-
-        ];
-
-        $activeMenu = 'barang'; // set menu yang sedang aktif
-
-        return view('barang.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'barang' => $barang, 'activeMenu' => $activeMenu]);
+        return view('barang.show_ajax', ['barang' => $barang]);
     }
 
     public function edit(string $id)

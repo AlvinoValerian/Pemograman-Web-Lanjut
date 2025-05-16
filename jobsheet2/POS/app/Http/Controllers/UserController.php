@@ -313,21 +313,9 @@ class UserController extends Controller
     }
     public function show_ajax(string $id)
     {
+        $user = UserModel::find($id);
 
-        $user = UserModel::with('level')->find($id);
-
-        $breadcrumb = (object) [
-            'title' => 'Detail User',
-            'list' => ['Home', 'User', 'Detail']
-        ];
-        $page = (object) [
-            'title' => 'Detail user'
-
-        ];
-
-        $activeMenu = 'user'; // set menu yang sedang aktif
-
-        return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
+        return view('user.show_ajax', ['user' => $user]);
     }
     
 
