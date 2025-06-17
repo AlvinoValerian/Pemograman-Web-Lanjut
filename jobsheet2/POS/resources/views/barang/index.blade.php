@@ -1,13 +1,13 @@
 @extends('layouts.template')
 
 @section('content')
-    <div class="card card-outline card-primary">
+    <div class="card card-outline card-primary">tableBarang
         <div class="card-header">
             <h3 class="card-title">Daftar Barang</h3>
             <div class="card-tools">
-                <button onclick="modalAction('{{url('/barang/import')}}')" class="btn btn-info">Import Barang</button>
-                <a class="btn btn-primary " href="{{ url('barang/create') }}">Tambah Data</a>
-                <button onclick="modalAction('{{url('/barang/create_ajax')}}')" class="btn btn-success ">Tambah
+                <button onclick="modalAction('{{url('/barang/import')}}')" class="btn btn-sm btn-info mt-1">Import Barang</button>
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah Data</a>
+                <button onclick="modalAction('{{url('/barang/create_ajax')}}')" class="btn btn-sm btn-success mt-1">Tambah
                     Data (Ajax)</button>
             </div>
         </div>

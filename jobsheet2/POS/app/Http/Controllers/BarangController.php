@@ -335,7 +335,7 @@ class BarangController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'status' => false,
-                    'massage' => 'Validasi Gagal',
+                    'message' => 'Validasi Gagal',
                     'msgField' => $validator->errors()
                 ]);
             }
