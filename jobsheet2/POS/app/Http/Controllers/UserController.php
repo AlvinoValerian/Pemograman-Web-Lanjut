@@ -7,7 +7,10 @@ use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 // class UserController extends Controller
 // {
@@ -318,7 +321,7 @@ class UserController extends Controller
 
         return view('user.show_ajax', ['user' => $user]);
     }
-    
+
 
     public function edit(string $id)
     {
@@ -469,7 +472,7 @@ class UserController extends Controller
         return redirect('/');
     }
 
-        public function import()
+    public function import()
     {
         return view('user.import');
     }
@@ -496,11 +499,11 @@ class UserController extends Controller
             $spreadsheet = $reader->load($file->getRealPath()); //load file excel
             $sheet = $spreadsheet->getActiveSheet(); //ambil sheet yang ktif
 
-            $data= $sheet->toArray(null,false,true,true); //ambil data ecxel
+            $data = $sheet->toArray(null, false, true, true); //ambil data ecxel
 
             $insert = [];
-            if(count($data) > 1){ //jika data lebih dari 1 baris
-                foreach ($data as $baris => $value){
+            if (count($data) > 1) { //jika data lebih dari 1 baris
+                foreach ($data as $baris => $value) {
                     if ($baris > 1) { //baris ke 1 adalah header, maka lewati
                         $insert[] = [
                             'level_id' => $value['A'],
@@ -510,7 +513,7 @@ class UserController extends Controller
                         ];
                     }
                 }
-                if (count($insert ) > 0) {
+                if (count($insert) > 0) {
                     // insert data ke datatabase, jika data sudah ada, maka diabaikan
                     UserModel::insertOrIgnore($insert);
                 }
@@ -519,9 +522,9 @@ class UserController extends Controller
                     'status' => true,
                     'message' => 'Data berhasil di import'
                 ]);
-            }else{
+            } else {
                 return response()->json([
-                    'status' =>false,
+                    'status' => false,
                     'message' => 'Tidak ada data yang diimport'
                 ]);
             }
@@ -604,4 +607,22 @@ class UserController extends Controller
         }
         return redirect('/');
     }
+    public function export_pdf()
+    {
+
+        $user = UserModel::select('username', 'nama', 'level_id')
+            ->orderBy('user_id')
+            ->with('level')
+            ->get();
+
+        // use Barryvdh\DomPDF\Facade\Pdf;
+        $pdf = Pdf::loadView('user.export_pdf', ['user' => $user]);
+        $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
+        $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url
+        $pdf->render();
+
+        return $pdf->stream('Data user ' . date('Y-m-d H:i:s') . '.pdf');
+    }
+
+
 }

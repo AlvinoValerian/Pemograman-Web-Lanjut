@@ -7,13 +7,14 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Validator;
 // use Yajra\DataTables\Facades\DataTables;
-use App\Models\LevelModel;
+// use App\Models\LevelModel;
 use App\Models\BarangModel;
 use App\Models\KategoriModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Yajra\DataTables\Facades\DataTables;
 
 class BarangController extends Controller
@@ -433,6 +434,25 @@ class BarangController extends Controller
 
         exit;
         // end function export_excel
+    }
+    public function export_pdf()
+    {
+        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+            ->orderBy('kategori_id')
+            ->orderBy('barang_kode')
+            ->with('kategori')
+            ->get();
+        // dd($barang);
+        // use Barryvdh\DomPDF\Facade\Pdf;
+        $pdf = Pdf::loadView('barang.export_pdf', ['barang' => $barang]);
+        // dd($pdf);
+        $pdf->setPaper('a4', 'portrait'); // set ukuran kertas dan orientasi
+        $pdf->setOption('isRemoteEnabled', true); // set true jika ada gambar dari url
+        $pdf->render();
+
+        // dd($pdf);
+
+        return $pdf->stream('Data Barang ' . date('Y-m-d H:i:s') . '.pdf');
     }
     public function confirm_ajax(string $id)
     {

@@ -8,9 +8,11 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,7 @@ Route::middleware(['auth'])->group(function () { //semua route di dalam group in
         Route::get('level/import', [LevelController::class, 'import']); // ajax form uplod excel
         Route::post('level/import_ajax', [LevelController::class, 'import_ajax']); //ajax import excel
         Route::get('/level/export_excel', [LevelController::class, 'export_excel']);
+        Route::get('/level/export_pdf', [LevelController::class, 'export_pdf']);
     });
     Route::middleware(['authorize:ADM,MNG'])->group(function () {
         Route::get('/barang',  [BarangController::class, 'index']);
@@ -74,6 +77,7 @@ Route::middleware(['auth'])->group(function () { //semua route di dalam group in
         Route::get('/barang/import', [BarangController::class, 'import']); // ajax form uplod excel
         Route::post('/barang/import_ajax', [BarangController::class, 'import_ajax']); //ajax import excel
         Route::get('/barang/export_excel', [BarangController::class, 'export_excel']);
+        Route::get('/barang/export_pdf', [BarangController::class, 'export_pdf']);
     });
 });
 
@@ -126,6 +130,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/import', [UserController::class, 'import']); // ajax form uplod excel
     Route::post('/import_ajax', [UserController::class, 'import_ajax']); //ajax import excel
     Route::get('/export_excel', [UserController::class, 'export_excel']);
+    Route::get('/export_pdf', [UserController::class, 'export_pdf']);
 });
 
 // Route::group(['prefix' => 'level'], function () {
@@ -165,6 +170,7 @@ Route::group(['prefix' => 'kategori'], function () {
     Route::get('/import', [KategoriController::class, 'import']); // ajax form uplod excel
     Route::post('/import_ajax', [KategoriController::class, 'import_ajax']); //ajax import excel
     Route::get('/export_excel', [KategoriController::class, 'export_excel']);
+    Route::get('/export_pdf', [KategoriController::class, 'export_pdf']);
 });
 
 // Route::group(['prefix' => 'barang'], function () {
@@ -204,4 +210,10 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::get('/import', [SupplierController::class, 'import']); // ajax form uplod excel
     Route::post('/import_ajax', [SupplierController::class, 'import_ajax']); //ajax import excel
     Route::get('/export_excel', [SupplierController::class, 'export_excel']);
+    Route::get('/export_pdf', [SupplierController::class, 'export_pdf']);
+});
+    Route::group(['prefix' => 'profil'], function () {
+    Route::get('/',  [ProfilController::class, 'index']);
+    Route::get('/{id}/edit_image',  [ProfilController::class, 'editImage']);
+    Route::put('/{id}/update_image',  [ProfilController::class, 'updateImage']);
 });

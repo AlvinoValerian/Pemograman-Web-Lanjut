@@ -3,10 +3,16 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            @if(Auth::user()->image)
+                <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                    class="img-circle elevation-1" alt="User Image">
+            @else
+                <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                    alt="User Image">
+            @endif
         </div>
         <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="{{ url('user') }}" class="d-block">{{ Auth::user()->username }}</a>
         </div>
     </div>
 
@@ -26,11 +32,17 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
+            with font-awesome or any other icon font library -->
             <li class="nav-item">
                 <a href="{{ url('/') }}" class="nav-link {{ ($activeMenu == 'dashboard') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/profil') }}" class="nav-link {{ $activeMenu == 'profil' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Akun & Profile</p>
                 </a>
             </li>
             <li class="nav-header">Data Pengguna</li>
@@ -38,7 +50,7 @@
                 <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-layer-group"></i>
                     <p>Level User</p>
-                <a>
+                    <a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/user') }}" class="nav-link {{ ($activeMenu == 'user') ? 'active' : '' }}">
@@ -46,12 +58,12 @@
                     <p>Data User</p>
                 </a>
             <li>
-                <li class="nav-item">
-                    <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>Data Supplier</p>
-                    </a>
-                <li>
+            <li class="nav-item">
+                <a href="{{ url('/supplier') }}" class="nav-link {{ ($activeMenu == 'supplier') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Data Supplier</p>
+                </a>
+            <li>
             <li class="nav-header">Data Barang</li>
             <li class="nav-item">
                 <a href="{{ url('/kategori') }}" class="nav-link {{ ($activeMenu == 'kategori') ? 'active' : '' }}">
