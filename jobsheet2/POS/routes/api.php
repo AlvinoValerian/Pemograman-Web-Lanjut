@@ -31,3 +31,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/logout', LogoutController::class)->name('logout');
+
+Route::get('levels', [LevelController::class, 'index']);
+Route::post('levels', [LevelController::class, 'store']);
+Route::get('levels/{level}', [LevelController::class, 'show']);
+Route::put('levels/{level}', [LevelController::class, 'update']);
+Route::delete('levels/{level}', [LevelController::class, 'destroy']);
